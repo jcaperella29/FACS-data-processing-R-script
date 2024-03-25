@@ -65,9 +65,13 @@ ggcyto(gs,aes(x=GFP),subset="Live",)+geom_density(fill="forestgreen")+geom_gate(
 ps <- gs_pop_get_count_with_meta(gs)
 ps <- ps %>% mutate(percent_of_parent=Count/ParentCount)
 ps_df<-ps %>% select(sampleName,well,Population,Count,ParentCount,percent_of_parent) %>% head() %>% data.frame() 
+#Isolate samples with living cells that are GSP postive 
+ps_df_live_GFP<- ps_df[ps_df$Population== "/Singlets/Live/GFP positive", ]
 
-write.csv(ps_df,"C:/Users/ccape/Downloads/FACS_results")
 
 
-# orginal code from https://jchellmuth.com/posts/FACS-with-R/ added/changed lines to add with reporting.
+write.csv(ps_df_live_GFP,"C:/Users/ccape/Downloads/FACS_results")
+
+
+# orginal code from https://jchellmuth.com/posts/FACS-with-R/ added/changed lines to filter results  add with reporting.
 
